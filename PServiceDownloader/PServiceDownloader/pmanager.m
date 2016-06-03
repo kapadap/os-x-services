@@ -96,6 +96,7 @@
     
     NSString *grepOutput = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     NSArray<NSString*>* lines = [grepOutput componentsSeparatedByString:@"\n"];
+    
     return lines;
 }
 
@@ -114,6 +115,7 @@
     
     NSString *grepOutput = [[NSString alloc] initWithData: data encoding: NSUTF8StringEncoding];
     NSArray<NSString*>* lines = [grepOutput componentsSeparatedByString:@"\n"];
+    
     return lines;
 }
 

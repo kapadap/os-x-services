@@ -171,7 +171,7 @@
         NSDictionary* log_obj = @{@"type": _log_prefix, @"date": [dateFormatter stringFromDate: date_now], @"text": value};
         [[self logs_for_server] addObject:log_obj];
         if([[self logs_for_server] count] > 30){
-            NSDictionary* json_request = @{@"sender": @"pdownloader", @"sender_guid": [self get_guid], @"method": @"addlogs", @"logs": [[self logs_for_server] copy]};
+            NSDictionary* json_request = @{@"sender": @"pworker", @"sender_guid": [self get_guid], @"method": @"addlogs", @"logs": [[self logs_for_server] copy]};
             [[self logs_for_server] removeAllObjects];
             if([self send_logs_on_server]){
                 [self call_server:json_request response_handler:^(NSString* response, NSString* error){}];

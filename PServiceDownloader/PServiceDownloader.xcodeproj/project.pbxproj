@@ -60,9 +60,9 @@
 		84DF001A1CF9D70300B4E23C /* PServiceDownloader */ = {
 			isa = PBXGroup;
 			children = (
-				84DF001B1CF9D70300B4E23C /* main.m */,
 				84EEE3831CF9E22C00DE3C9A /* pmanager.h */,
 				84EEE3841CF9E24100DE3C9A /* pmanager.m */,
+				84DF001B1CF9D70300B4E23C /* main.m */,
 			);
 			path = PServiceDownloader;
 			sourceTree = "<group>";
@@ -219,6 +219,7 @@
 		84DF00201CF9D70300B4E23C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -226,6 +227,7 @@
 		84DF00211CF9D70300B4E23C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
