@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "container:"
+      name = "Files">
+      <FileRef
+         location = "group:addon_files/pservice.php">
+      </FileRef>
+      <FileRef
+         location = "group:addon_files/pservice.worker.plist">
+      </FileRef>
+      <FileRef
+         location = "group:addon_files/pservice.downloader.plist">
+      </FileRef>
+      <FileRef
+         location = "group:/Users/admin/Work/PServices/addon_files/install_services.sh">
+      </FileRef>
+      <FileRef
+         location = "group:addon_files/readme.txt">
+      </FileRef>
+      <FileRef
+         location = "group:addon_files/uninstall_services.sh">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:PServiceWorker/PServiceWorker.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:PServiceDownloader/PServiceDownloader.xcodeproj">
+   </FileRef>
+</Workspace>
