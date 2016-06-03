@@ -25,6 +25,7 @@ int main(int argc, const char * argv[]) {
     [manager log:@"Started *********************************" log_type:[PManager PLOG_MESSAGE]];
     [manager trace_info];
     while(![manager should_stop]){
+        report_memory(manager);
         [manager do_work];
         // wait
         int wait_numnber = 100;
@@ -35,4 +36,35 @@ int main(int argc, const char * argv[]) {
     
     [manager log:@"Finished *********************************" log_type:[PManager PLOG_MESSAGE]];
     return 0;
+}
+
+NSDate* report_memory_started = nil;
+vm_size_t report_memory_initial_mem_kb = 0;
+
+int report_memory(PManager* manager) {
+    @try {
+        NSTimeInterval seconds_elapsed = 0.0;
+        if(!report_memory_started){
+            report_memory_started = [NSDate dateWithTimeIntervalSinceNow:0];
+        }
+        struct task_basic_info info;
+        mach_msg_type_number_t size = sizeof(info);
+        kern_return_t kerr = task_info(mach_task_self(), TASK_BASIC_INFO, (task_info_t)&info, &size);
+        if( kerr == KERN_SUCCESS ) {
+            NSTimeInterval elapsed_hours = floor(seconds_elapsed / (60.0 * 60.0));
+            NSTimeInterval elapsed_minutes = floor((seconds_elapsed - elapsed_hours * 60.0 * 60.0) / 60.0);
+            vm_size_t memusage_kb = (vm_size_t)(info.resident_size / 1000);
+            if(!report_memory_initial_mem_kb)
+            report_memory_initial_mem_kb = memusage_kb;
+            vm_size_t memusage_diff_kb = memusage_kb - report_memory_initial_mem_kb;
+            NSString* memusage_diff_sign = (memusage_diff_kb > 0 ? @"+" : @"");
+            [manager log:[NSString stringWithFormat:@"MEMUSE: %lu kb (%@%lu kb since %i:%i)", memusage_kb, memusage_diff_sign, memusage_diff_kb, (int)elapsed_hours, (int)elapsed_minutes] log_type:[PManager PLOG_MESSAGE]];
+            return 0;
+        } else {
+            [manager log:[NSString stringWithFormat:@"ERRO MEMUSE: %s", mach_error_string(kerr)] log_type:[PManager PLOG_WARNING]];
+        }
+    } @catch (NSException *exception) {
+        
+    }
+    return 1;
 }
